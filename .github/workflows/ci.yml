@@ -30,3 +30,14 @@ jobs:
 
     - name: Build Docker image
       run: docker build -t my-node-app .
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Push Docker image
+      run: |
+        docker tag my-node-app sharmilakannan/my-node-app:latest
+        docker push sharmilakannan/my-node-app:latest
