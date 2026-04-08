@@ -5,6 +5,7 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -21,9 +22,11 @@ jobs:
 
     - name: Install dependencies
       run: npm install
+      working-directory: .   # 👈 ensures it runs from repo root
 
     - name: Run tests
-      run: echo "No tests yet" # replace with npm test later
+      run: npm test
+      working-directory: .
 
     - name: Build Docker image
       run: docker build -t my-node-app .
